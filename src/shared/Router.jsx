@@ -9,6 +9,7 @@ import Main from "../pages/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import MyPage from "../pages/MyPage";
+import TestPage from "../pages/TestPage";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
 
@@ -32,6 +33,7 @@ const SharedRouter = () => (
       <Route path="/login" element={<PublicRoute element={Login} />} />
       <Route path="/signup" element={<PublicRoute element={Signup} />} />
       <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
+      <Route path="/test" element={<PrivateRoute element={TestPage} />} />
     </Routes>
   </Router>
 );
