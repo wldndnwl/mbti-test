@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -26,18 +26,27 @@ const PublicRoute = ({ element: Element, ...rest }) => {
   return !isAuthenticated ? <Element {...rest} /> : <Navigate to="/mypage" />;
 };
 
-const SharedRouter = () => (
-  <Router>
-    <Header />
-    <Routes>
-      <Route path="/" element={<Main />} />
-      <Route path="/login" element={<PublicRoute element={Login} />} />
-      <Route path="/signup" element={<PublicRoute element={Signup} />} />
-      <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
-      <Route path="/test" element={<PrivateRoute element={TestPage} />} />
-      <Route path="/results" element={<PrivateRoute element={TestResult} />} />
-    </Routes>
-  </Router>
-);
+const SharedRouter = () => {
+  const [user, setUser] = useState({});
+  return (
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<PublicRoute element={Login} />} />
+        <Route path="/signup" element={<PublicRoute element={Signup} />} />
+        <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
+        <Route
+          path="/test"
+          element={<PrivateRoute element={TestPage} user={user} />}
+        />
+        <Route
+          path="/results"
+          element={<PrivateRoute element={TestResult} />}
+        />
+      </Routes>
+    </Router>
+  );
+};
 
 export default SharedRouter;
