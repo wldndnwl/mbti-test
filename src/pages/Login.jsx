@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +10,7 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  console.log("id, pw=>", id, password);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,15 +19,16 @@ const Login = () => {
         { id, password }
       );
       const data = response.data;
+      console.log("data=>", data);
       if (data.success) {
         login(data.accessToken);
         navigate("/mypage");
       } else {
-        alert("Login failed");
+        alert("Login failed2");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Login failed");
+      alert("Login failed1");
     }
   };
 
