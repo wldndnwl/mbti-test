@@ -13,8 +13,8 @@ const TestPage = ({ user }) => {
   const handleTestSubmit = async (answers) => {
     const mbtiResult = calculateMBTI(answers);
     const resultData = {
-      userId: user.id,
-      nickname: user.nickname,
+      userId: user?.id,
+      nickname: user?.nickname,
       result: mbtiResult,
       answers,
       date: new Date().toISOString(),
@@ -30,7 +30,7 @@ const TestPage = ({ user }) => {
   };
 
   const handleViewResults = () => {
-    navigate("/results"); // 결과 페이지로 이동
+    navigate("/results"); // 결과 페이지로
   };
 
   return (
