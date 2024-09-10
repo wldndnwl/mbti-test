@@ -1,25 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { getTestResults } from "../api/testResults";
+import {
+  getTestResults,
+  updateTestResultVisibility,
+  deleteTestResult,
+} from "../api/testResults";
 import TestResultList from "../components/TestResultList";
 
 const TestResult = ({ user }) => {
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchResults = async () => {
-    const data = await getTestResults();
-    setResults(data);
+    setLoading(true);
+    try {
+      const data = await getTestResults();
+      setResults(data);
+    } catch (error) {
+      console.log("가져오기 에러=>", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchResults();
   }, []);
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     fetchResults();
   };
 
-  const handleDelete = () => {
-    fetchResults();
+  const handleDelete = async (id) => {
+    if (window.confirm("결과를 삭제하시나요? 정말요? 진심으로?")) {
+      try {
+        await deleteTestResult(id);
+        fetchResults();
+      } catch (error) {
+        console.log("삭제 에러=>", error);
+      }
+    }
   };
 
   return (
@@ -28,12 +47,16 @@ const TestResult = ({ user }) => {
         <h1 className="text-3xl font-bold text-primary-color mb-6 text-center">
           모든 테스트 결과
         </h1>
-        <TestResultList
-          results={results}
-          user={user}
-          onUpdate={handleUpdate}
-          onDelete={handleDelete}
-        />
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <TestResultList
+            results={results}
+            user={user}
+            onUpdate={handleUpdate}
+            onDelete={handleDelete}
+          />
+        )}
       </div>
     </div>
   );

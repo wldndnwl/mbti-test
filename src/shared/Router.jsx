@@ -12,6 +12,7 @@ import MyPage from "../pages/MyPage";
 import TestPage from "../pages/TestPage";
 import { AuthContext } from "../context/AuthContext";
 import Header from "../components/Header";
+import TestResult from "../pages/TestResult";
 
 // PrivateRoute: 로그인이 필요한 페이지에 접근할 수 있도록 하는 컴포넌트
 const PrivateRoute = ({ element: Element, ...rest }) => {
@@ -34,6 +35,7 @@ const SharedRouter = () => (
       <Route path="/signup" element={<PublicRoute element={Signup} />} />
       <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
       <Route path="/test" element={<PrivateRoute element={TestPage} />} />
+      <Route path="/results" element={<PrivateRoute element={TestResult} />} />
     </Routes>
   </Router>
 );
