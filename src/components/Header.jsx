@@ -1,18 +1,9 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("정말로 로그아웃 하시겠습니까?");
-    if (confirmLogout) {
-      logout();
-      navigate("/");
-    }
-  };
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <header
@@ -46,7 +37,18 @@ const Header = () => {
       >
         {isAuthenticated ? (
           <>
-            <button onClick={handleLogout}>Logout</button>
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontSize: "20px",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
+              to="/profile"
+            >
+              Profile
+            </Link>
           </>
         ) : (
           <>
