@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const { isAuthenticated } = useContext(AuthContext);
-
   return (
     <header
       style={{
@@ -26,7 +23,7 @@ const Header = () => {
           }}
           to="/"
         >
-          Sparta
+          HOME
         </Link>
       </h1>
       <nav
@@ -35,49 +32,18 @@ const Header = () => {
           gap: "20px",
         }}
       >
-        {isAuthenticated ? (
-          <>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-              to="/profile"
-            >
-              Profile
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-              to="/login"
-            >
-              Login
-            </Link>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-              to="/signup"
-            >
-              Signup
-            </Link>
-          </>
-        )}
+        <Link
+          style={{
+            textDecoration: "none",
+            color: "black",
+            fontSize: "20px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+          to="/login"
+        >
+          Login
+        </Link>
       </nav>
     </header>
   );

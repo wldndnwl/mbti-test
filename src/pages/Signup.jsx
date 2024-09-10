@@ -13,11 +13,7 @@ const Signup = () => {
     try {
       const response = await axios.post(
         "https://moneyfulpublicpolicy.co.kr/register",
-        {
-          id,
-          password,
-          nickname,
-        }
+        { id, password, nickname }
       );
       const data = response.data;
       if (data.success) {
@@ -32,28 +28,47 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Signup Page</h2>
-      <form onSubmit={handleSubmit}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+      }}
+    >
+      <h2>회원가입 페이지</h2>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          width: "300px",
+        }}
+      >
         <input
           type="text"
           value={id}
           onChange={(e) => setId(e.target.value)}
           placeholder="ID"
+          required
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          required
         />
         <input
           type="text"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="Nickname"
+          required
         />
-        <button type="submit">Signup</button>
+        <button type="submit">회원가입</button>
       </form>
     </div>
   );
