@@ -16,7 +16,7 @@ const Main = () => {
   return (
     <div>
       <h2>Main Page</h2>
-      <button onClick={handleClick}>Go to MyPage</button>
+      {/* <button onClick={handleClick}>Go to MyPage</button> */}
     </div>
   );
 };
