@@ -33,16 +33,22 @@ const SharedRouter = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/login" element={<PublicRoute element={Login} />} />
+        <Route
+          path="/login"
+          element={<PublicRoute element={Login} setUser={setUser} />}
+        />
         <Route path="/signup" element={<PublicRoute element={Signup} />} />
-        <Route path="/mypage" element={<PrivateRoute element={MyPage} />} />
+        <Route
+          path="/mypage"
+          element={<PrivateRoute element={MyPage} user={user} />}
+        />
         <Route
           path="/test"
           element={<PrivateRoute element={TestPage} user={user} />}
         />
         <Route
           path="/results"
-          element={<PrivateRoute element={TestResult} />}
+          element={<PrivateRoute element={TestResult} user={user} />}
         />
       </Routes>
     </Router>

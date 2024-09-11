@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TestForm from "../components/TestForm";
 import { calculateMBTI } from "../utils/mbtiCalculator";
 import { createTestResult } from "../api/testResults";
@@ -10,11 +10,18 @@ const TestPage = ({ user }) => {
   const [result, setResult] = useState(null); // MBTI 결과 저장
   const [isSubmitted, setIsSubmitted] = useState(false); // 제출 여부 확인
 
+  // useEffect(() => {
+  //   if (!user || !user.id) {
+  //     alert("로그인이 필요해요.");
+  //     navigate("/login");
+  //   }
+  // }, [user, navigate]);
+
   const handleTestSubmit = async (answers) => {
     const mbtiResult = calculateMBTI(answers);
     const resultData = {
-      userId: user?.id,
-      nickname: user?.nickname,
+      userId: user.id,
+      nickname: user.nickname,
       result: mbtiResult,
       answers,
       date: new Date().toISOString(),

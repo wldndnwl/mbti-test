@@ -5,10 +5,19 @@ import {
   deleteTestResult,
 } from "../api/testResults";
 import TestResultList from "../components/TestResultList";
+import { useNavigate } from "react-router-dom";
 
 const TestResult = ({ user }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!user || !user.id) {
+  //     alert("로그인이 필요합니다.");
+  //     navigate("/login");
+  //   }
+  // }, [user, navigate]);
 
   const fetchResults = async () => {
     setLoading(true);

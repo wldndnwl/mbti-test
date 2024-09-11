@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const MyPage = () => {
+const MyPage = ({ user }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [newNickname, setNewNickname] = useState("");
   const { isAuthenticated } = useContext(AuthContext);
@@ -14,23 +14,27 @@ const MyPage = () => {
       alert("로그인이 필요합니다.");
       navigate("/login");
     } else {
-      const fetchUserInfo = async () => {
-        try {
-          const token = localStorage.getItem("accessToken");
-          const response = await axios.get(
-            "https://moneyfulpublicpolicy.co.kr/user",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
-          setUserInfo(response.data);
-        } catch (error) {
-          console.error("Failed to fetch user info:", error);
-        }
-      };
-      fetchUserInfo();
+      if (user && user.id) {
+        setUserInfo(user);
+      } else {
+        const fetchUserInfo = async () => {
+          try {
+            const token = localStorage.getItem("accessToken");
+            const response = await axios.get(
+              "https://moneyfulpublicpolicy.co.kr/user",
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            setUserInfo(response.data);
+          } catch (error) {
+            console.error("Failed to fetch user info:", error);
+          }
+        };
+        fetchUserInfo();
+      }
     }
   }, [isAuthenticated, navigate]);
 

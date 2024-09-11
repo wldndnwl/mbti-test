@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
@@ -22,6 +22,7 @@ const Login = () => {
       console.log("data=>", data);
       if (data.success) {
         login(data.accessToken);
+        setUser(data.user);
         navigate("/mypage");
       } else {
         alert("Login failed2");
