@@ -20,8 +20,8 @@ const TestPage = ({ user }) => {
   const handleTestSubmit = async (answers) => {
     const mbtiResult = calculateMBTI(answers);
     const resultData = {
-      userId: user.id,
-      nickname: user.nickname,
+      userId: user?.id,
+      nickname: user?.nickname,
       result: mbtiResult,
       answers,
       date: new Date().toISOString(),

@@ -22,7 +22,6 @@ const Login = ({ setUser }) => {
       console.log("data=>", data);
       if (data.success) {
         login(data.accessToken);
-        setUser(data.user);
         navigate("/mypage");
       } else {
         alert("Login failed2");
